@@ -1,0 +1,2 @@
+module TestServer::FileDownloaderHelper
+end

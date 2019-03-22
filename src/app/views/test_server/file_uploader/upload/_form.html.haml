@@ -1,0 +1,27 @@
+%h1
+  = t('views.file_uploader.upload.title')
+
+= form_for @file_upload, url: { action: :create }, html: { multipart: true, id: :form, class: :'ts-form' } do |form|
+  .ts-form-group
+    = form.hidden_field :uploaded_file
+    %label{ for: :uploaded_file}
+      = t('views.file_uploader.upload.fields.file')
+    = form.file_field :uploaded_file, html: { class: 'ts-field-file' }
+    .ts-form-group-checkbox
+      = form.check_box :virus_scan
+      %label{ for: :virus_scan }
+        = t('views.file_uploader.upload.fields.virus_scan')
+    .ts-form-group-checkbox
+      = form.check_box :filetype_detection
+      %label{ for: :filetype_detection }
+        = t('views.file_uploader.upload.fields.filetype_detection')
+    .ts-form-group-checkbox
+      = form.check_box :checksum_calculation
+      %label{ for: :checksum_calculation }
+        = t('views.file_uploader.upload.fields.checksum_calculation')
+  = form.submit t('views.application.buttons.upload'), id: :upload, class: 'ts-button-upload', name: :upload
+  %a#reset.ts-button-reset{href: '#', name: 'reset'}
+    = t('views.application.buttons.reset')
+  %span.ts-inline#request-spinner
+    = image_tag 'ajax-loader.gif', alt: t('views.file_uploader.upload.spinner.text')
+    = t('views.file_uploader.upload.spinner.text')

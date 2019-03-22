@@ -1,0 +1,34 @@
+#!/usr/bin/env sh
+
+source ./env.sh
+
+source /etc/os-release
+OS=$(echo $NAME | tr '[A-Z]' '[a-z]')
+VER=$VERSION_ID
+
+if type sudo >/dev/null 2>&1; then
+  SUDO=sudo
+else
+  SUDO=
+fi
+
+case "$OS" in
+  fedora*)
+    $SUDO dnf install -y file-devel clamav clamd
+    ;;
+  centos*)
+    $SUDO yum install -y file-devel clamav clamd
+    ;;
+  debian*)
+    $SUDO apt-get install libmagic-dev
+    ;;
+  alpine*)
+    $SUDO apk update
+    $SUDO apk add file-dev
+    ;;
+  "arch linux"*)
+    $SUDO pacman -S file
+    ;;
+  *)
+    echo "Your os $OS is not supported yet" ;;
+esac

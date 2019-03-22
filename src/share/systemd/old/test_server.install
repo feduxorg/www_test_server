@@ -1,0 +1,28 @@
+pkgname=test_server
+_image_name=${pkgname/_/-}
+
+post_install() {
+  echo "Importing docker image"
+  docker load -i /opt/$pkgname/docker.tar
+
+  echo ""
+  echo "Please enable and start the service at your will."
+  echo ""
+  echo "systemctl enable $pkgname"
+  echo "systemctl start $pkgname"
+  echo ""
+  echo ""
+  echo "Please define SECRET_KEY_BASE at /etc/$pkgname/environment.conf."
+  echo ""
+  echo ""
+
+}
+
+post_upgrade() {
+  post_install
+}
+
+pre_remove() {
+  systemctl stop $pkgname
+  systemctl disable $pkgname
+}

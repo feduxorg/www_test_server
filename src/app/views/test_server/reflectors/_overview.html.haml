@@ -1,0 +1,14 @@
+%section.ts-dashboard-section
+  .ts-dashboard-section-header
+    %h3.ts-dashboard-section-title
+      = t("views.reflectors.title")
+  .ts-dashboard-section-body
+    %ul
+      %li
+        = link_to t("views.reflectors_client_ip_address.title"), test_server_reflectors_client_ip_address_path
+      %li
+        = link_to t("views.reflectors_request_headers.title"), test_server_reflectors_request_headers_path
+      %li
+        = link_to t("views.reflectors_request_body.title"), test_server_reflectors_request_body_path
+      %li
+        = link_to t("views.reflectors_params.title"), test_server_reflectors_params_path

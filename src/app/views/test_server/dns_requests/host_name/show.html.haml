@@ -1,0 +1,18 @@
+%h1
+  = t('views.dns_requests_host_name.show.title')
+
+%section.ts-actions
+  = link_to t('views.application.buttons.new'), new_test_server_dns_requests_host_name_path , class: 'ts-button-new', name: 'new'
+
+%table.ts-item-table
+  %tr
+    %th
+      = t('views.dns_requests_host_name.show.fields.name')
+    %td
+      = @dns_request.name
+  - @dns_request.ip_addresses.each do |address|
+    %tr
+      %th
+        = t('views.dns_requests_host_name.show.fields.ip_address')
+      %td
+        = address

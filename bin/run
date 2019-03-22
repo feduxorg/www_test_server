@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ "${CI_DEBUG_TRACE}" == "true" ]; then
+  set -x
+  env
+fi
+
+source ./env.sh
+docker run --name ${CI_PROJECT_NAME}-1 --rm -it -e DATABASE_URL=sqlite3:/db/production.sqlite3 -v $PWD/db:/db ${DOCKER_CURRENT_IMAGE_TAG} $*

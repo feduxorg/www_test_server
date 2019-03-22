@@ -1,0 +1,34 @@
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+$open-sans-path: 'open-sans/fonts';
+@import "open-sans/scss/open-sans";
+
+html {
+  font-family: "Open Sans", sans-serif;
+  font-size: 1rem;
+}
+
+.fe-font-smaller {
+  font-size: .5rem;
+}
+
+.fe-font-small{
+  font-size: .75rem;
+}
+
+.fe-font-normal {
+  font-size: 1rem;
+}
+
+.fe-font-big {
+  font-size: 1.3rem;
+}
+
+.fe-font-bigger {
+  font-size: 2rem;
+}
+
+.fe-font-large {
+  font-size: 3rem;
+}

@@ -1,0 +1,29 @@
+%h1
+  = User.model_name.human
+  = format('"%s"', @user.email)
+
+%section.ts-actions
+  = link_to t('views.application.buttons.edit'), edit_user_path(@user), class: 'ts-button-edit'
+  = link_to t('views.application.buttons.cancel'), users_path, class: 'ts-button-cancel', name: 'cancel'
+  - if @user.approved?
+    = link_to t('views.application.buttons.toggle_unapprove'), toggle_approve_user_path(@user), class: 'ts-button-toggle-unapprove'
+  - else
+    = link_to t('views.application.buttons.toggle_approve'), toggle_approve_user_path(@user), class: 'ts-button-toggle-approve'
+  - if @user.removable?
+    = link_to t('views.application.buttons.toggle_removable'), toggle_removable_user_path(@user), class: 'ts-button-toggle-removable'
+  - else
+    = link_to t('views.application.buttons.toggle_unremovable'), toggle_removable_user_path(@user), class: 'ts-button-toggle-unremovable'
+  = link_to t('views.application.buttons.destroy'), @user, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'ts-button-destroy'
+
+%table.ts-item-table
+  - %i(email approved removable reset_password_sent_at sign_in_count current_sign_in_at last_sign_in_at current_sign_in_ip last_sign_in_ip created_at updated_at).each do |attribute|
+    %tr
+      %th
+        = User.human_attribute_name(attribute)
+      %td
+        = @user.public_send(attribute)
+  %tr
+    %th
+      = User.human_attribute_name(:role)
+    %td
+      = @user.role.name

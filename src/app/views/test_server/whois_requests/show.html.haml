@@ -1,0 +1,17 @@
+%h1
+  = t('views.whois_requests.show.title')
+
+%section.ts-actions
+  = link_to t('views.application.buttons.new'), new_test_server_whois_request_path , class: 'ts-button-new', name: 'new'
+
+%table.ts-item-table
+  %tr
+    %th
+      = t('views.whois_requests.show.fields.request')
+    %td
+      = @whois_request.request
+  %tr
+    %th
+      = t('views.whois_requests.show.fields.response')
+    %td
+      = simple_format(@whois_request.response)

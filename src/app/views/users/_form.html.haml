@@ -1,0 +1,14 @@
+= form_for @user, html: { multipart: true, id: :form, class: :'ts-form' } do |form|
+  .ts-form-group
+    = form.label :email
+    = form.text_field :email, class: 'ts-field-label'
+  .ts-form-group
+    = form.label :password
+    = form.password_field :password, class: 'ts-field-label', autocomplete: :off, required: true
+  .ts-form-group
+    = form.label :role
+    = form.collection_select :role_id, Role.all, :id, :name
+  = form.submit t('views.application.buttons.save'), id: :save, class: 'ts-button-upload', name: :save
+  %a#reset.ts-button-reset{href: '#', name: 'reset'}
+    = t('views.application.buttons.reset')
+  = link_to t('views.application.buttons.cancel'), users_path, class: 'ts-button-cancel', name: 'cancel'

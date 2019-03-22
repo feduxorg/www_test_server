@@ -1,0 +1,56 @@
+
+%h1
+  = t('views.file_downloads.show.title')
+
+%section.ts-actions
+  - if policy(TestServer::FileDownload).edit?
+    = link_to t('views.application.buttons.edit'), edit_test_server_file_download_path(@file_download), class: 'ts-button-edit'
+  - if policy(TestServer::FileDownload).show?
+    = link_to t('views.application.buttons.cancel'), test_server_file_downloads_path, class: 'ts-button-cancel', name: 'cancel'
+  - if policy(TestServer::FileDownload).show?
+    = link_to t('views.application.buttons.download'), attachment_url(@file_download, :file), download: @file_download.name, class: 'ts-button-download'
+  - if policy(TestServer::FileDownload).destroy?
+    = link_to t('views.application.buttons.destroy'), @file_download, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'ts-button-destroy'
+
+%table.ts-item-table
+  %tr
+    %th
+      = t('views.file_downloads.show.fields.filename')
+    %td
+      = @file_download.name
+  %tr
+    %th
+      = t('views.file_downloads.show.fields.label')
+    %td
+      = link_to @file_download.label, test_server_file_downloads_by_label_path(@file_download.label)
+  %tr
+    %th
+      = t('views.file_downloads.show.fields.filetype')
+    %td
+      = @file_download.filetype
+  %tr
+    %th
+      = t('views.file_downloads.show.fields.mime_type')
+    %td
+      = @file_download.mime_type
+  %tr
+    %th
+      = t('views.file_downloads.show.fields.size')
+    %td
+      = @file_download.size
+  %tr
+    %th
+      = t('views.file_downloads.index.fields.virus_id')
+    %td
+      - unless @file_download.virus_id =~ /ERROR/
+        = @file_download.virus_id
+  %tr
+    %th
+      = t('views.file_downloads.show.fields.uploaded_at')
+    %td
+      = @file_download.updated_at
+  %tr
+    %th
+      = t('views.file_downloads.show.fields.uploader')
+    %td
+      = @file_download.user.try(:email)

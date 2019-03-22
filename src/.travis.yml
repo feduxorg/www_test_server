@@ -1,0 +1,14 @@
+language: ruby
+bundler_args: --without development
+rvm:
+  - 2.1.7
+  - 2.2.0
+  - 2.3.0
+script: bin/test
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -y clamav clamav-freshclam
+  - sudo apt-get install -y libmagic1 libmagic-dev
+  - sudo freshclam
+  - sudo apt-get install -y clamav-daemon
+

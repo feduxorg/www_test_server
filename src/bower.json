@@ -1,0 +1,7 @@
+{
+  "name": "test_server",
+  "dependencies": {
+    "jquery": "latest",
+    "open-sans": "latest"
+  }
+}

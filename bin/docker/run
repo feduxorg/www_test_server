@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+set -e
+
+if [ "${CI_DEBUG_TRACE}" == "true" ]; then
+  set -x
+  env
+fi
+
+source ./env.sh
+
+echo docker run --name ${DOCKER_CONTAINER_NAME} --rm -it --network ${CI_NETWORK_MODE} -v $(pwd)/:/local_data $* ${DOCKER_CURRENT_IMAGE_TAG}
+docker run --name ${DOCKER_CONTAINER_NAME} --rm -it --network ${CI_NETWORK_MODE} -v $(pwd)/:/local_data $* ${DOCKER_CURRENT_IMAGE_TAG}

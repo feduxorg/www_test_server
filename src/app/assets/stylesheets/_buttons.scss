@@ -1,0 +1,122 @@
+.ts-button-start {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+.ts-button-stop {
+  @extend .btn;
+  @extend .btn-secondary;
+  margin-left: 10px;
+}
+
+.ts-button-close-headline {
+  @extend .close;
+}
+
+.ts-button-new {
+  @extend .btn;
+  @extend .btn-success;
+}
+
+.ts-button-close,
+.ts-button-upload,
+.ts-button-download,
+.ts-button-reset,
+.ts-button-cancel,
+.ts-button-show,
+.ts-button-edit,
+.ts-button-logout,
+.ts-button-toggle-removable,
+.ts-button-toggle-unremovable,
+.ts-button-send,
+.ts-button-config {
+  @extend .btn;
+  @extend .btn-secondary;
+}
+
+.ts-button-clone {
+  @extend .btn;
+  @extend .btn-secondary;
+  margin-left: 10px;
+}
+
+.ts-button-toggle-approve {
+  @extend .btn;
+  @extend .btn-success;
+}
+
+.ts-button-login {
+  @extend .btn;
+  @extend .btn-primary;
+}
+
+.ts-button-destroy,
+.ts-button-toggle-unapprove {
+  @extend .btn;
+  @extend .btn-danger;
+}
+
+.ts-button-show-slim,
+.ts-button-edit-slim,
+.ts-button-destroy-slim,
+.ts-button-new-slim,
+.ts-button-download-slim,
+.ts-button-login-slim,
+.ts-button-logout-slim,
+.ts-button-config-slim,
+.ts-button-toggle-approve-slim,
+.ts-button-toggle-unapprove-slim,
+.ts-button-toggle-removable-slim,
+.ts-button-toggle-unremovable-slim,
+.ts-button-show-slim {
+  @extend .btn-sm;
+}
+
+.ts-button-show-slim {
+  @extend .ts-button-show;
+}
+.ts-button-edit-slim {
+  @extend .ts-button-edit;
+}
+
+.ts-button-destroy-slim {
+  @extend .ts-button-destroy;
+}
+
+.ts-button-new-slim {
+  @extend .ts-button-new;
+}
+
+.ts-button-download-slim {
+  @extend .ts-button-download;
+}
+
+.ts-button-login-slim {
+  @extend .ts-button-login;
+  margin-right: 1rem;
+}
+
+.ts-button-logout-slim {
+  @extend .ts-button-logout;
+}
+
+.ts-button-config-slim {
+  @extend .ts-button-config;
+  margin-right: 1rem;
+}
+
+.ts-button-toggle-approve-slim {
+  @extend .ts-button-toggle-approve;
+}
+
+.ts-button-toggle-unapprove-slim {
+  @extend .ts-button-toggle-approve;
+}
+
+.ts-button-toggle-removable-slim {
+  @extend .ts-button-toggle-removable;
+}
+
+.ts-button-toggle-unremovable-slim {
+  @extend .ts-button-toggle-unremovable;
+}

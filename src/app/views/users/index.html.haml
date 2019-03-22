@@ -1,0 +1,43 @@
+%h1
+  = t('views.users.index.title')
+
+= link_to t('views.users.new.link'), new_user_path,  class: 'ts-button-new'
+
+%table.ts-data-table
+  %thead
+    %tr
+      %th.ts-data-column-75
+        = User.human_attribute_name(:email)
+      %th.ts-data-column-75
+        = User.human_attribute_name(:approved)
+      - %i(sign_in_count current_sign_in_at last_sign_in_at current_sign_in_ip last_sign_in_ip created_at updated_at).each do |attribute|
+        %th.ts-data-column-100
+          = User.human_attribute_name(attribute)
+      %th.ts-data-column-35
+        = User.human_attribute_name(:role)
+
+      %th.ts-data-column-100
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td
+          = link_to user.email, user
+        %td
+          = user.approved
+        - %i(sign_in_count current_sign_in_at last_sign_in_at current_sign_in_ip last_sign_in_ip created_at updated_at).each do |attribute|
+          %td
+            = user.public_send(attribute)
+        %td
+          = user.role.name
+        %td
+          = link_to t('views.application.buttons.show'), user, class: 'ts-button-show-slim'
+          = link_to t('views.application.buttons.edit'), edit_user_path(user), class: 'ts-button-edit-slim'
+          - if user.approved?
+            = link_to t('views.application.buttons.toggle_unapprove'), toggle_approve_user_path(user), class: 'ts-button-toggle-unapprove-slim'
+          - else
+            = link_to t('views.application.buttons.toggle_approve'), toggle_approve_user_path(user), class: 'ts-button-toggle-approve-slim'
+          - if user.removable?
+            = link_to t('views.application.buttons.toggle_removable'), toggle_removable_user_path(user), class: 'ts-button-toggle-removable-slim'
+          - else
+            = link_to t('views.application.buttons.toggle_unremovable'), toggle_removable_user_path(user), class: 'ts-button-toggle-unremovable-slim'
+          = link_to t('views.application.buttons.destroy'), user, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'ts-button-destroy-slim'

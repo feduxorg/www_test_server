@@ -1,0 +1,5 @@
+logrotate: bash -c "if [ -x /usr/sbin/logrotate -a -f /etc/logrotate.d/webapp.conf ]; then /usr/sbin/logrotate /etc/logrotate.d/webapp.conf; else sleep infinity; fi"
+webapp: puma --environment ${RAILS_ENV} --bind tcp://${RACK_HOST}:${RACK_PORT}
+cache: bash -c "if [ -x /usr/bin/memcached ]; then /usr/bin/memcached -u memcache; else sleep infinity; fi"
+freshclam: bash -c "if [ -x /usr/bin/freshclam ]; then while true; do /usr/bin/freshclam -c 4 || echo \"No error\"; echo \"Wait for tomorrow $(date --date='next day') to update patterns again\"; sleep 86400; done; else sleep infinity; fi"
+clamd: bash -c "if [ -x /usr/sbin/clamd ]; then while true; do /usr/sbin/clamd -F || echo \"No error\"; sleep 10; done; else sleep infinity; fi"

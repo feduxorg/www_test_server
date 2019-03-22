@@ -1,0 +1,12 @@
+%section.ts-dashboard-section
+  .ts-dashboard-section-header
+    %h3.ts-dashboard-section-title
+      = t("views.meta_information.title")
+  .ts-dashboard-section-body
+    %ul
+      %li
+        = link_to t("views.whois_requests.title"), new_test_server_whois_request_path
+      %li
+        = link_to t("views.dns_requests_host_name.title"), new_test_server_dns_requests_host_name_path
+      %li
+        = link_to t("views.dns_requests_ip_address.title"), new_test_server_dns_requests_ip_address_path

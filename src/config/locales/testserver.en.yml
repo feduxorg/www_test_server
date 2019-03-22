@@ -1,0 +1,297 @@
+---
+en:
+  errors:
+    default: 
+      summary: Unexpected Error...
+      details: Sorry, but I cannot fullfill your request. An unexpected error occured. Please ask your administrator for support.
+    internal_error: 
+      summary: Internal error...
+      details: 'Sorry, but I cannot fullfill your request. An internal error occured: "%{message}". Please notify the author of the software about the problem.'
+    user_error:
+      summary: User Error...
+      details: Sorry, but I cannot fullfill your request. An error occured. There should be a better error message displayed here. Please notify the author of the software about the problem.
+    invalid_request:
+      summary: Invalid Request ...
+      details: Sorry, but I cannot fullfill your request. You send an invalid request.
+  views:
+    application:
+      title: www_test_server -- Testing your HTTP proxy servers made easy
+      buttons:
+        start: 'Start'
+        stop: 'Stop'
+        reset: 'Reset'
+        close: 'Close'
+        clone: 'Clone'
+        upload: 'Upload'
+        download: 'Download'
+        cancel: 'Cancel'
+        destroy: 'Delete'
+        login: 'Login'
+        logout: 'Logout'
+        save: 'Save'
+        send: 'Send'
+        toggle_unapprove: Unapprove
+        toggle_approve: Approve
+        toggle_removable: Unremovable
+        toggle_unremovable: Removable
+        configuration: 'Configuration'
+    dialogs:
+      notification:
+        title: Notification
+    root:
+      link: Home
+    test:
+      link: Tests
+    string:
+      title: String Tests
+      link: String
+      index:
+        title: Overview for streaming tests
+        link: Overview
+      sleep:
+        title: Sleeps for a "count" amount of time and sends back string
+        link: Sleep and Send
+      random:
+        title: Sends random data back
+        link: Random Data
+      plain:
+        title: Sends plain static string back
+        link: Plain Data
+      eicar:
+        title: Sends eicar test string back
+        link: Eicar Test File
+    streaming:
+      title: Streaming Tests
+      link: Streaming
+      index:
+        title: Overview for streaming tests
+        link: Overview
+      random:
+        title: Sends random data back
+        link: Random Data
+      plain:
+        title: Sends plain static string back
+        link: Plain Data
+      eicar:
+        title: Sends eicar test string back
+        link: Eicar Test File
+
+    dashboard:
+      title: Dashboard
+      link: Dashboard
+      show:
+        title: Dashboard
+        link: Dashboard
+    reflector:
+      title: Reflector
+      link: Reflector
+      client_ip_address:
+        title: Show Your Client IP Address
+        link: Client IP Address
+      index:
+        title: Overview for Reflectors
+        link: Overview
+    file_uploader:
+      title: File Uploader
+      link: File Uploader
+      index:
+        title: Overview for File Uploads
+        link: Overview
+      result:
+        title: "Information about %{file}"
+        link: "%{file}"
+        fields:
+          file: File
+          checksum: Checksums
+          filename: Filename
+          virus: Virus ID
+          filetype: Filetype
+          mime_type: MIME Type
+          size: Size
+          uploader: Uploader
+      upload:
+        title: Upload file
+        link: Upload file
+        fields:
+          file: File
+          virus_scan: Scan for viruses
+          filetype_detection: Detect filetype
+          checksum_calculation: Calculate Checksums
+        spinner:
+          text: Waiting for upload to finish...
+    file_downloads:
+      title: File Downloader
+      link: File Downloader
+      index:
+        title: Overview of available Files for Downloads
+        link: Overview
+        title: List of uploaded files
+        link: Uploaded files
+        fields:
+          file: File
+          filename: Filename
+          filetype: Filetype
+          label: Label
+          virus_id: Virus ID
+          size: Size
+          uploaded_at: Uploaded at
+      show:
+        title: Download file
+        link: Download file
+        fields:
+          file: File
+          filename: Filename
+          filetype: Filetype
+          label: Label
+          virus_id: Virus ID
+          size: Size
+          uploaded_at: Uploaded at
+      new:
+        title: Upload file
+        link: Upload new file
+      edit:
+        title: Upload new file content
+      form:
+        link: Upload file
+        fields:
+          file: File
+          checksum: Checksums
+          filename: Filename
+          label: Label
+          filetype: Filetype
+          size: Size
+        spinner:
+          text: Waiting for upload to finish...
+
+    static:
+      link: Static
+      title: Static content
+      index:
+        title: Overview for static files
+        link: Overview
+      plain:
+        title: Plain static content
+    configuration:
+      title: Configuration
+      link: Configuration
+      index:
+        title: Configuration Options
+        link: Overview
+    users:
+      title: Configure Users
+      link: Users
+      index:
+        title: Users
+        link: Users
+      new:
+        title: Create new User
+        link: Create new User
+    generator:
+      title: Generators
+      link: Generators
+      index:
+        title: Overview for Generators
+        link: Overview
+      xhr:
+        title: Send requests via Javascript
+        link: XHR
+        fields: &fields
+          url: URL
+          count: Count
+          timeout: Timeout (ms)
+          repeat: Repeat Requests
+        result_table:
+          url: URL
+          runtime: Runtime (ms)
+          timeout: Timeout (ms)
+          status: Status
+        spinner: 
+          text: Waiting for results...
+    meta_information:
+      title: Gathering Meta Information
+      link: Meta Information
+      index:
+        link: Overview
+    dns_requests_host_name:
+      title: Resolve Hostname
+      link: Resolve Hostname
+      new:
+        title: Resolve Hostname
+        link: Resolve Hostname
+        fields:
+          name: Hostname
+          ip_address: IP Address
+      show:
+        title: Resolved Hostname
+        link: Resolved Hostname
+        fields:
+          name: Hostname
+          ip_address: IP Address
+    dns_requests_ip_address:
+      title: Resolve IP Address
+      link: Resolve IP Address
+      new:
+        title: Resolve IP Address
+        link: Resolve IP Address
+        fields:
+          name: Hostname
+          ip_address: IP Address
+      show:
+        title: Resolved IP Address
+        link: Resolved IP Address
+        fields:
+          name: Hostname
+          ip_address: IP Address
+    whois_requests:
+      title: Gather WHOIS information
+      link: Gather WHOIS information
+      new:
+        title: Gather WHOIS information
+        link: Gather WHOIS information
+        fields:
+          request: Request
+          response: Response
+      show:
+        title: Gathered WHOIS information
+        link: Gathered WHOIS information
+        fields:
+          request: Request
+          response: Response
+    reflectors:
+      title: Show Information send by client
+      link: Reflectors
+      index:
+        title: Overview
+        link: Overview
+    reflectors_request_headers:
+      title: Show HTTP request headers
+      link: Show HTTP request headers
+      show:
+        title: Show HTTP request headers
+        link: Current request
+        fields:
+          name: Header
+          value: Value
+    reflectors_request_body:
+      title: Show HTTP post body
+      link: Show HTTP post body
+      show:
+        title: Show HTTP post body
+        link: Current request
+    reflectors_params:
+      title: Show params of request
+      link: Show params of request
+      show:
+        title: Show params of request
+        link: Current request
+        fields:
+          name: Parameter
+          value: Value
+    reflectors_client_ip_address:
+      title: Show Client IP Address
+      link: Show Client IP Address
+      show:
+        title: Show Client IP Address
+        link: Current IP
+        fields:
+          ip: Current IP Address

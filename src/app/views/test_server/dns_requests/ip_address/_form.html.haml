@@ -1,0 +1,8 @@
+= form_for @dns_request, url: test_server_dns_requests_ip_address_index_path , html: { multipart: true, id: :form, class: :'ts-form' } do |form|
+  .ts-form-group
+    %label{ for: :ip_address}
+      = t('views.dns_requests_ip_address.new.fields.ip_address')
+    = form.text_field :ip_address, class: 'ts-field-ip_address'
+  = form.submit t('views.application.buttons.send'), id: :send, class: 'ts-button-send', name: :send
+  %a#reset.ts-button-reset{href: '#', name: 'reset'}
+    = t('views.application.buttons.reset')

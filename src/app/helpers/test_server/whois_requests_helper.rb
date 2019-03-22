@@ -1,0 +1,2 @@
+module TestServer::WhoisRequestsHelper
+end

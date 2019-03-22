@@ -1,0 +1,2 @@
+module TestServer::FileUploaderHelper
+end

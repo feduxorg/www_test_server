@@ -1,0 +1,40 @@
+= render 'form'
+
+%h3
+  = t('views.file_uploader.result.title', file: @file_upload.uploaded_file.name)
+
+%section.ts-result
+  %div.ts-form-group
+    %label.ts-form-label 
+      = t('views.file_uploader.result.fields.filename')
+    %div
+      = h(@file_upload.uploaded_file.name)
+  - if @file_upload.uploaded_file.contains_virus?
+    %div.ts-form-group
+      %label.ts-form-label 
+        = t('views.file_uploader.result.fields.virus')
+      %div
+        = @file_upload.uploaded_file.virus_id
+  - if @file_upload.uploaded_file.has_filetype?
+    %div.ts-form-group
+      %label.ts-form-label 
+        = t('views.file_uploader.result.fields.filetype')
+      %div
+        = @file_upload.uploaded_file.filetype
+  - if @file_upload.uploaded_file.has_checksum?
+    %div.ts-form-group
+      %label.ts-form-label 
+        = t('views.file_uploader.result.fields.checksum')
+      %div.ts-list
+        - @file_upload.uploaded_file.checksum.each do |s|
+          %li.ts-list-element
+            = s.to_s
+  %div.ts-form-group
+    %label.ts-form-label 
+      = t('views.file_uploader.result.fields.size')
+    %div
+      %ul.ts-list
+        - @file_upload.uploaded_file.size.values.each do |s|
+          %li.ts-list-element
+            = s.to_s
+  

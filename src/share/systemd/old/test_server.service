@@ -1,0 +1,18 @@
+[Unit]
+Description=Test Server for Proxy Testing
+After=docker.service
+Requires=docker.service
+
+[Service]
+ExecStart=/usr/bin/systemd-docker run --rm -p 8080:80 --name %n -v /opt/test_server/data/log:/opt/test_server/log -v /opt/test_server/data/tmp:/opt/test_server/tmp -e SECRET_KEY_BASE=${SECRET_KEY_BASE} maxmeyer/test-server /usr/local/bundle/bin/rails server --port=80 --binding=0.0.0.0
+
+Restart=always
+RestartSec=10s
+Type=notify
+NotifyAccess=all
+TimeoutStartSec=120
+TimeoutStopSec=15
+EnvironmentFile=/etc/test_server/environment.conf
+
+[Install]
+WantedBy=multi-user.target

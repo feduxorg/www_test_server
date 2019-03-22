@@ -1,0 +1,15 @@
+= form_for @file_download, html: { multipart: true, id: :form, class: :'ts-form' } do |form|
+  %label{ for: :file}
+    = t('views.file_downloads.show.fields.file')
+  = form.attachment_field :file
+  .ts-form-group
+    %label{ for: :label}
+      = t('views.file_downloads.show.fields.label')
+    = form.text_field :label, class: 'ts-field-label'
+  = form.submit t('views.application.buttons.upload'), id: :upload, class: 'ts-button-upload', name: :upload
+  %a#reset.ts-button-reset{href: '#', name: 'reset'}
+    = t('views.application.buttons.reset')
+  = link_to t('views.application.buttons.cancel'), test_server_file_downloads_path, class: 'ts-button-cancel', name: 'cancel'
+  %span.ts-inline#request-spinner
+    = image_tag 'ajax-loader.gif', alt: t('views.file_downloads.form.spinner.text')
+    = t('views.file_downloads.form.spinner.text')

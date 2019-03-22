@@ -1,0 +1,17 @@
+%section.ts-dashboard-section
+  .ts-dashboard-section-header
+    %h3.ts-dashboard-section-title
+      = t("views.#{controller_name}.title")
+  .ts-dashboard-section-body
+    %ul
+    - supported_actions.each do |action|
+      %li
+        - if static == true
+          = link_to t("views.#{controller_name}.#{action}.title"), "/#{controller_name}/#{action}.html"
+        - else
+          = link_to t("views.#{controller_name}.#{action}.title"), send("test_server_#{controller_name}_#{action}_path")
+          %br
+          %span.ts-dashboard-known_params
+            - unless parameter_sanitizer.allowed_parameters.blank?
+              = surround '(', ')' do
+                = parameter_sanitizer.allowed_parameters.join(', ')

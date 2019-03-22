@@ -1,0 +1,17 @@
+[Unit]
+Description=Webservice for %I
+
+[Service]
+ENV RAILS_ENV production
+EnvironmentFile=/etc/default/machines/%I.conf
+Environment="WWW_DIR=/srv/machines/%I/current"
+Environment="PORT=80"
+Environment="NETWORK_INTERFACE=0.0.0."
+ExecStart=/usr/local/bundle/bin/rails server --port=${PORT} --binding=${NETWOR_INTERFACE}
+KillMode=process
+KillSignal=SIGINT
+# TimeoutStopSec=10
+SendSIGKILL=no
+
+[Install]
+WantedBy=network.target

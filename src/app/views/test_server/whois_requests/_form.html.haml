@@ -1,0 +1,8 @@
+= form_for @whois_request, html: { multipart: true, id: :form, class: :'ts-form' } do |form|
+  .ts-form-group
+    %label{ for: :information}
+      = t('views.whois_requests.new.fields.request')
+    = form.text_field :request, class: 'ts-field-name'
+  = form.submit t('views.application.buttons.send'), id: :send, class: 'ts-button-send', name: :send
+  %a#reset.ts-button-reset{href: '#', name: 'reset'}
+    = t('views.application.buttons.reset')

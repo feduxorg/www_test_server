@@ -1,0 +1,16 @@
+[Unit]
+Description=%I Rails Application
+
+[Service]
+Environment="RUBY_MAJOR=2.2"
+Environment="RUBY_VERSION=2.2.0"
+Environment="GEM_HOME=/usr/local/bundle"
+Environment="PATH=/usr/local/bundle/bin:/usr/bin"
+Environment="BUNDLE_APP_CONFIG=/usr/local/bundle"
+EnvironmentFile=-/etc/default/rails-%I.conf
+ExecStart=/usr/bin/systemd-nspawn --register=no -x -M test-server --setenv RUBY_MAJOR=${RUBY_MAJOR} --setenv RUBY_VERSION=${RUBY_VERSION} --setenv GEM_HOME=${GEM_HOME} --setenv PATH=${PATH} --setenv BUNDLE_APP_CONFIG=${BUNDLE_APP_CONFIG} /usr/local/bundle/bin/rails
+KillMode=process
+SendSIGKILL=no
+
+[Install]
+WantedBy=network.target

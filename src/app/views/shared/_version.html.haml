@@ -1,0 +1,10 @@
+%div
+  - if user_signed_in?
+    = format('%s: %s', User.model_name.human, current_user.email)
+    = link_to t('views.application.buttons.logout'), destroy_user_session_url(login_via_ssl? ? {protocol: :https} : {}), method: :delete, class: 'ts-button-logout-slim', data: { confirm: 'Really want to logout?' }
+    - if policy(:configuration).index?
+      = link_to t('views.application.buttons.configuration'), configuration_index_path, class: 'ts-button-config-slim'
+  - else
+    = link_to(t('views.application.buttons.login'), new_user_session_url(login_via_ssl? ? {protocol: :https} : {}), class: 'ts-button-login-slim')
+  Version
+  = format('v%s', TestServer::VERSION)

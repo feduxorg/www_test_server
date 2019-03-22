@@ -1,0 +1,15 @@
+%h1
+  = t('views.reflectors_params.show.title')
+
+%table.ts-item-table
+  %tr
+    %th
+      = t('views.reflectors_params.show.fields.name')
+    %td
+      = t('views.reflectors_params.show.fields.value')
+  - @my_params.each do |h|
+    %tr
+      %th
+        = h.name
+      %td
+        = h.value

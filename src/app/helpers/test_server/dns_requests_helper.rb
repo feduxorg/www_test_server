@@ -1,0 +1,2 @@
+module TestServer::DnsRequestsHelper
+end

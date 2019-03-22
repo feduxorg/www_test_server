@@ -1,0 +1,56 @@
+%h1
+  = t('views.file_downloads.index.title')
+
+- if policy(TestServer::FileDownload).new?
+  = link_to t('views.file_downloads.new.link'), new_test_server_file_download_path,  class: 'ts-button-new'
+
+%table.ts-data-table
+  %thead
+    %tr
+      %th
+        = t('views.file_downloads.index.fields.filename')
+      %th
+        = t('views.file_downloads.index.fields.label')
+      %th
+        = t('views.file_downloads.index.fields.filetype')
+      %th
+        = t('views.file_downloads.index.fields.mime_type')
+      %th
+        = t('views.file_downloads.index.fields.virus_id')
+      %th
+        = t('views.file_downloads.index.fields.size')
+      %th
+        = t('views.file_downloads.index.fields.uploaded_at')
+      %th
+        = t('views.file_downloads.index.fields.uploader')
+      %th
+
+  %tbody
+    - @file_downloads.each do |file|
+      %tr
+        %td.ts-data-column-100
+          = link_to file.name, file
+        %td.ts-data-column-100
+          = link_to file.label, test_server_file_downloads_by_label_path(file.label)
+        %td.ts-data-column-100
+          = file.filetype
+        %td.ts-data-column-50
+          = file.mime_type
+        %td.ts-data-column-100
+          - unless file.virus_id =~ /ERROR/
+            = file.virus_id
+        %td.ts-data-column-75
+          = file.size
+        %td.ts-data-column-75
+          = file.updated_at
+        %td.ts-data-column-35
+          = file.user.try(:email)
+        %td.ts-data-column-100
+          - if policy(TestServer::FileDownload).show?
+            = link_to t('views.application.buttons.show'), file, class: 'ts-button-show-slim'
+          - if policy(TestServer::FileDownload).edit?
+            = link_to t('views.application.buttons.edit'), edit_test_server_file_download_path(file), class: 'ts-button-edit-slim'
+          - if policy(TestServer::FileDownload).show?
+            = link_to t('views.application.buttons.download'), attachment_url(file, :file), download: file.name, class: 'ts-button-download-slim'
+          - if policy(TestServer::FileDownload).destroy?
+            = link_to t('views.application.buttons.destroy'), file, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'ts-button-destroy-slim'

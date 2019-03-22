@@ -1,0 +1,8 @@
+= form_for @dns_request, url: test_server_dns_requests_host_name_index_path , html: { multipart: true, id: :form, class: :'ts-form' } do |form|
+  .ts-form-group
+    %label{ for: :name}
+      = t('views.dns_requests_host_name.new.fields.name')
+    = form.text_field :name, class: 'ts-field-name'
+  = form.submit t('views.application.buttons.send'), id: :send, class: 'ts-button-send', name: :send
+  %a#reset.ts-button-reset{href: '#', name: 'reset'}
+    = t('views.application.buttons.reset')

@@ -1,0 +1,13 @@
+[Unit]
+Description=Rails Application
+
+[Service]
+# EnvironmentFile=/etc/default/rails.conf
+ExecStart=/usr/local/bundle/bin/rails server
+KillMode=process
+KillSignal=SIGINT
+SendSIGKILL=no
+WorkingDirectory=/srv/app
+
+[Install]
+WantedBy=network.target

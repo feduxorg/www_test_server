@@ -1,0 +1,67 @@
+#!/usr/bin/env sh
+
+source ./env.sh
+
+if [ -f /etc/os-release ]; then
+  # freedesktop.org and systemd
+  . /etc/os-release
+  OS=$NAME
+  VER=$VERSION_ID
+elif type lsb_release >/dev/null 2>&1; then
+  # linuxbase.org
+  OS=$(lsb_release -si)
+  VER=$(lsb_release -sr)
+elif [ -f /etc/lsb-release ]; then
+  # For some versions of Debian/Ubuntu without lsb_release command
+  . /etc/lsb-release
+  OS=$DISTRIB_ID
+  VER=$DISTRIB_RELEASE
+elif [ -f /etc/debian_version ]; then
+  # Older Debian/Ubuntu/etc.
+  OS=Debian
+  VER=$(cat /etc/debian_version)
+elif [ -f /etc/SuSe-release ]; then
+  # Older SuSE/etc.
+  ...
+elif [ -f /etc/redhat-release ]; then
+  OS=$(cut -d " " -f 1 < /etc/redhat-release)
+  VER=$(cut -d " " -f 4 < /etc/redhat-release)
+else
+  # Fall back to uname, e.g. "Linux <version>", also works for BSD, etc.
+  OS=$(uname -s)
+  VER=$(uname -r)
+fi
+
+OS=$(echo $OS | tr '[A-Z]' '[a-z]')
+
+if type sudo >/dev/null 2>&1; then
+  SUDO=sudo
+else
+  SUDO=
+fi
+
+case "$OS" in
+  fedora*)
+    # $SUDO dnf install -y my-package
+    # $SUDO curl -L https://example.com/my-script -o ~/bin/my-script 
+    # $SUDO chmod +x ~/bin/my-script
+    ;;
+  centos*)
+    # $SUDO yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    # $SUDO curl -L https://example.com/my-script -o ~/bin/my-script 
+    # $SUDO chmod +x ~/bin/my-script
+    ;;
+  "red hat"*)
+    # $SUDO yum install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+    # $SUDO curl -L https://example.com/my-script -o ~/bin/my-script 
+    # $SUDO chmod +x ~/bin/my-script
+    ;;
+  alpine*)
+    # apk update --no-progress --no-cache && apk upgrade --no-progress --no-cache
+    # apk add my-package
+    # $SUDO curl -L https://example.com/my-script -o ~/bin/my-script 
+    # $SUDO chmod +x ~/bin/my-script
+    ;;
+  *)
+    echo "Your os $OS is not supported yet" ;;
+esac

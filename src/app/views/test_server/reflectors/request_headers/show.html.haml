@@ -1,0 +1,15 @@
+%h1
+  = t('views.reflectors_request_headers.show.title')
+
+%table.ts-item-table
+  %tr
+    %th
+      = t('views.reflectors_request_headers.show.fields.name')
+    %td
+      = t('views.reflectors_request_headers.show.fields.value')
+  - @http_headers.each do |h|
+    %tr
+      %th
+        = h.name
+      %td
+        = h.value

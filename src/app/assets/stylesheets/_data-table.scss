@@ -1,0 +1,38 @@
+.ts-data-table {
+  @extend .table;
+  @extend .table-hover;
+}
+
+.ts-data-column-300 {
+  width: 300px;
+}
+
+.ts-data-column-200 {
+  width: 200px;
+}
+
+.ts-data-column-100 {
+  width: 100px;
+}
+
+.ts-data-column-75 {
+  width: 75px;
+}
+
+.ts-data-column-50 {
+  width: 50px;
+}
+
+.ts-data-column-35 {
+  width: 35px;
+}
+
+.ts-item-table {
+  @extend .table;
+  margin-top: 2rem;
+}
+
+.ts-item-table td {
+  word-break: break-all;
+  max-width: 300px;
+}

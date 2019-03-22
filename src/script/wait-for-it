@@ -1,0 +1,93 @@
+#!/usr/bin/env ruby
+
+require 'socket'
+require 'timeout'
+
+class Host
+  attr_reader :name, :port
+
+  def initialize(url)
+    uri = URI(url)
+
+    @name = uri.host
+    @port = uri.port
+  end
+
+  def port?
+    return false if @port.nil? || @port.zero?
+
+    true
+  end
+
+  def to_s
+    format '%s:%s', @name, @port
+  end
+end
+
+class PortChecker
+  def initialize
+    @wait_times = [1, 2, 5, 7, 13, 17]
+  end
+
+  def connected?(url)
+    if url.nil? || url.empty?
+      puts "URL is empty. We assume you're some URL without a port, may be a database url using \"sqlite3\", so there's not need to wait for a service to come up"
+
+      return true
+    end
+
+    host = Host.new(url)
+
+    unless host.port?
+      puts "There's no port in \"#{host}\". We assume you're some URL without a port, may be a database url using \"sqlite3\", so there's not need to wait for a service to come up"
+      return true
+    end
+
+    wait_times = @wait_times.dup
+
+    puts "Connect to service \"#{host}\""
+    loop do
+      wait_for_s = wait_times.shift
+
+      if wait_for_s.nil?
+        puts "No connection after #{@wait_times.size} attempts and #{@wait_times.reduce(:+)} seconds of wait time."
+        return false
+      end
+
+      if is_port_open? host
+        return true
+      end
+
+      puts "No connection to service. Wait for #{wait_for_s} seconds"
+
+      sleep wait_for_s.to_i
+    end
+  end
+
+  private
+
+  def is_port_open?(host)
+    begin
+      Timeout::timeout(1) do
+        begin
+          s = TCPSocket.new(host.name, host.port)
+          s.close
+          return true
+        rescue Errno::ECONNREFUSED, Errno::EHOSTUNREACH, SocketError
+          return false
+        end
+      end
+    rescue Timeout::Error
+    end
+
+    return false
+  end
+end
+
+if PortChecker.new.connected? ARGV[0]
+  puts "Connection established"
+  exit 0
+end
+
+puts "Connection could not be established. Giving up"
+exit 1

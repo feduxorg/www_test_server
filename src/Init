@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+
+require 'uri'
+require 'digest'
+require 'active_support/all'
+
+if File.exists?('/srv/app/Gemfile.lock') && File.mtime('/srv/app/Gemfile.lock') > File.mtime('/release.txt')
+  puts "-- Updating gems in container as the Gemfile.lock is newer than the release--Info in the container"
+  system "/usr/local/bundle/bin/bundle update" 
+end
+
+puts "-- Waiting for the database to be available"
+system "/usr/local/bin/wait-for-it #{ENV['DATABASE_URL']}"
+sleep 3
+
+puts "-- Run database migrations"
+system "LOG_LEVEL=warn /usr/local/bundle/bin/rails db:migrate"
+
+puts "-- Current configuration for application"
+ENV.to_a.sort.each do |k, v|
+  v = '[FILTERED]' if k =~ /.*password.*/i
+  puts format("%s=%s", k, v)
+end
+
+puts "-- Render freshclam configuration"
+system "/usr/local/bin/envtpl /etc/clamav/freshclam.conf.tpl > /etc/clamav/freshclam.conf"
+
+puts "-- Start application"
+system "/usr/local/bundle/bin/foreman start -e /tmp/.env-intentionally-left-blank"

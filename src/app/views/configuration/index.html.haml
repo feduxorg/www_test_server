@@ -1,0 +1,8 @@
+%section.ts-dashboard-section
+  .ts-dashboard-section-header
+    %h3.ts-dashboard-section-title
+      = t('views.configuration.index.title')
+  .ts-dashboard-section-body
+    %ul
+      %li
+        = link_to User.model_name.human, users_path

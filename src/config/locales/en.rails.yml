@@ -1,0 +1,19 @@
+en:
+  activerecord:
+    models:
+      user: User
+    attributes:
+      user:
+        email: E-Mail-Address
+        approved: Approved?
+        removable: Removable?
+        encrypted_password: Encrypted Password
+        password: Password
+        reset_password_token: Password Reset Token
+        reset_password_sent_at: Sent Password Reset Token at
+        remember_created_at: Remember Phrase created at
+        sign_in_count: Login Count
+        current_sign_in_at: Current Login at
+        last_sign_in_at: Last Login On
+        current_sign_in_ip: Current Login IP
+        last_sign_in_ip: Last Login IP

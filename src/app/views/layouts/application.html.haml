@@ -1,0 +1,104 @@
+!!!
+%html
+  %head
+    %meta{ charset: 'utf-8'}
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    %title= @title || t('views.application.title')
+    = csrf_meta_tags
+  %body{ 'data-no-turbolink' => true } 
+    .ts-page-header
+      %nav.ts-top-navigation{ role: 'navigation' }
+        %ul.ts-navbar
+          %li.ts-nav-item.active.nav-link
+            %a{href: '/', role: "button" }
+              = t('views.root.link')
+          - if policy(:generator).index?
+            %li.ts-dropdown
+              %a.ts-dropdown-toggle{ href: test_server_generator_path, role: "button", "data-toggle": "dropdown" }
+                = t('views.generator.link')
+              %ul.ts-dropdown-menu.dropdown-menu
+                %li.ts-dropdown-item
+                  = link_to t('views.generator.index.link'), test_server_generator_path
+                - [ :xhr ].each do |action|
+                  %li.ts-dropdown-item
+                    = link_to t("views.generator.#{action}.link"), send("test_server_generator_#{action}_path")
+          %li.ts-dropdown
+            %a.ts-dropdown-toggle{ href: test_server_string_path, role: "button", "data-toggle": "dropdown" , role: "button", "data-toggle": "dropdown" }
+              = t('views.string.link')
+            %ul.ts-dropdown-menu.dropdown-menu
+              %li.ts-dropdown-item
+                = link_to t('views.string.index.link'), test_server_string_path
+              - [ :plain, :random, :eicar, :sleep ].each do |action|
+                %li.ts-dropdown-item
+                  = link_to t("views.string.#{action}.link"), send("test_server_string_#{action}_path")
+          %li.ts-dropdown
+            %a.dropdown-toggle{ href: test_server_streaming_path , role: "button", "data-toggle": "dropdown" }
+              = t('views.streaming.link')
+            %ul.ts-dropdown-menu.dropdown-menu
+              %li.ts-dropdown-item
+                = link_to t('views.streaming.index.link'), test_server_streaming_path
+              - [ :plain, :random, :eicar ].each do |action|
+                %li.ts-dropdown-item
+                  = link_to t("views.streaming.#{action}.link"), send("test_server_streaming_#{action}_path")
+          %li.ts-dropdown
+            %a.dropdown-toggle{ href: '#' , role: "button", "data-toggle": "dropdown" }
+              = t('views.static.link')
+            %ul.ts-dropdown-menu.dropdown-menu
+              %li.ts-dropdown-item
+                = link_to t('views.static.index.link'), static_path
+              - [ :plain ].each do |action|
+                %li.ts-dropdown-item
+                  = link_to t("views.static.#{action}.title"), "/static/#{action}.html"
+          %li.ts-dropdown
+            %a.dropdown-toggle{ href: '#' , role: "button", "data-toggle": "dropdown" }
+              = t('views.reflectors.link')
+            %ul.ts-dropdown-menu.dropdown-menu
+              %li.ts-dropdown-item
+                = link_to t('views.reflectors.index.link'), test_server_reflectors_path
+              %li.ts-dropdown-item
+                = link_to t("views.reflectors_client_ip_address.title"), test_server_reflectors_client_ip_address_path
+              %li.ts-dropdown-item
+                = link_to t("views.reflectors_request_headers.title"), test_server_reflectors_request_headers_path
+              %li.ts-dropdown-item
+                = link_to t("views.reflectors_request_body.title"), test_server_reflectors_request_body_path
+              %li.ts-dropdown-item
+                = link_to t("views.reflectors_params.title"), test_server_reflectors_params_path
+          %li.ts-dropdown
+            %a.ts-dropdown-toggle{ href: test_server_file_uploader_path, role: "button", "data-toggle": "dropdown" }
+              = t('views.file_uploader.link')
+            %ul.ts-dropdown-menu.dropdown-menu
+              %li.ts-dropdown-item
+                = link_to t('views.file_uploader.index.link'), test_server_file_uploader_path
+              - [ :upload ].each do |action|
+                %li.ts-dropdown-item
+                  = link_to t("views.file_uploader.#{action}.link"), send("test_server_file_uploader_#{action}_path")
+          %li.ts-dropdown
+            %a.ts-dropdown-toggle{ href: test_server_file_downloads_path, role: "button", "data-toggle": "dropdown" }
+              = t('views.file_downloads.link')
+            %ul.ts-dropdown-menu.dropdown-menu
+              %li.ts-dropdown-item
+                = link_to t('views.file_downloads.index.link'), test_server_file_downloads_path
+              - if %i(new? edit? update?).any? { |m| policy(TestServer::FileDownload).public_send(m) }
+                %li.ts-dropdown-item
+                  = link_to t("views.file_downloads.form.link"), new_test_server_file_download_path
+          - if policy(:meta_information).index?
+            %li.ts-dropdown
+              %a.ts-dropdown-toggle{ href: test_server_meta_information_index_path, role: "button", "data-toggle": "dropdown" }
+                = t('views.meta_information.link')
+              %ul.ts-dropdown-menu.dropdown-menu
+                %li.ts-dropdown-item
+                  = link_to t('views.meta_information.index.link'), test_server_meta_information_index_path
+                %li.ts-dropdown-item
+                  = link_to t("views.whois_requests.new.link"), new_test_server_whois_request_path
+                %li.ts-dropdown-item
+                  = link_to t("views.dns_requests_host_name.new.link"), new_test_server_dns_requests_host_name_path
+                %li.ts-dropdown-item
+                  = link_to t("views.dns_requests_ip_address.new.link"), new_test_server_dns_requests_ip_address_path
+          %li.ts-version
+            = render partial: 'shared/version'
+      %ul.ts-breadcrumb
+        = render_breadcrumbs builder: TestServer::BreadcrumbBuilder
+      = render 'layouts/messages'
+    .ts-container
+      = yield
+    = javascript_include_tag 'application'

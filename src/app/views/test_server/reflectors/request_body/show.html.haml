@@ -1,0 +1,10 @@
+%p
+  Run this, to send request
+
+  :markdown
+    <pre>
+    curl -X POST \
+      -d field_name1=field_value1 \
+      -d field_name2=field_value2 \
+      http://#{request.host_with_port}/test_server/reflectors/request_body
+    </pre>
