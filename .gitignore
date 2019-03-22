@@ -24,4 +24,4 @@
 /src/log/
 /src/.bundle
 /db/
-/src/vendor/
+# /src/vendor/
