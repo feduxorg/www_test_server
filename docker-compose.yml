@@ -31,6 +31,8 @@ services:
       CLAMAV_CLAMD_TCP_ADDRESS: test-av-1
       # RAILS_ENV: development
       # LOG_LEVEL: debug
+    ports:
+      - 3000:3000
     volumes:
       - ./src:/srv/app
     networks:
