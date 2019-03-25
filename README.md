@@ -17,11 +17,24 @@ docker pull feduxorg/www_test_server
 Make sure no other server process is bound to port 3000 locally.
 
 ~~~bash
+# Maybe use need to run this command with `sudo` prefixed
 docker run \
   --name www_test_server-1 \
   --rm \
   -p 3000:3000 \
   feduxorg/www_test_server
+~~~
+
+Alternatively install `docker-compose` and run the whole bunch of images:
+
+~~~
+# Maybe use need to run this command with `sudo` prefixed
+docker-compose up \
+  --force-recreate \
+  --always-recreate-deps \
+  --abort-on-container-exit \
+  --renew-anon-volumes \
+  --remove-orphans
 ~~~
 
 ## Pre-seeding
