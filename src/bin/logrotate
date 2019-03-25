@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 if which logrotate >/dev/null 2>&1; then
-  logrotate -a -f /etc/logrotate.d/webapp.conf
+  logrotate -f /etc/logrotate.d/webapp.conf
 fi
 
 sleep infinity
