@@ -13,6 +13,12 @@ services:
     networks:
       - internal
 
+  av:
+    image: feduxorg/clamav
+    container_name: test-av-1
+    networks:
+      - internal
+
   web:
     image: feduxorg/www_test_server
     container_name: test-web-1
@@ -22,6 +28,7 @@ services:
     environment:
       DATABASE_URL: postgresql://test_production:Test123@test-db-1:5432/test_production
       RAILS_MAX_THREADS: 5
+      CLAMAV_CLAMD_TCP_ADDRESS: test-av-1
       # RAILS_ENV: development
       # LOG_LEVEL: debug
     volumes:

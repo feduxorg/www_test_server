@@ -1,5 +1,3 @@
 logrotate: bin/logrotate
 webapp: bin/puma
 cache: bin/memcached
-freshclam: bin/freshclam
-clamd: bin/clamd

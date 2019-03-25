@@ -22,8 +22,8 @@ ENV.to_a.sort.each do |k, v|
   puts format("%s=%s", k, v)
 end
 
-puts "-- Render freshclam configuration"
-system "/usr/local/bin/envtpl /etc/clamav/freshclam.conf.tpl > /etc/clamav/freshclam.conf"
+puts "-- Render configuration files"
+system "/usr/local/bin/envtpl /etc/clamav/clamd.conf.tpl > /etc/clamav/clamd.conf"
 
 puts "-- Start application"
 system "/usr/local/bundle/bin/foreman start -e /tmp/.env-intentionally-left-blank"

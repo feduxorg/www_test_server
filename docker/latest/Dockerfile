@@ -89,19 +89,13 @@ ENV RACK_HOST="0.0.0.0"
 ENV RACK_PORT=3000
 ENV DEFAULT_MAIL_URL_HOST "http://localhost:3000"
 ENV DATABASE_URL "sqlite3:db/${RAILS_ENV}.sqlite3?timeout=10000"
+ENV CLAMAV_CLAMD_TCP_SOCKET "3310"
+ENV CLAMAV_CLAMD_TCP_ADDRESS "clamav-1"
 ENV LOGIN_VIA_SSL "true"
 
 # Install clamAV
 RUN apt-get update -y \
-  && apt-get install -y clamav clamav-base clamav-freshclam clamav-unofficial-sigs clamav-daemon
-
-# Setup clamav
-RUN install -d /etc/clamd.d \
-  && sed -i 's/^#User/User/' /etc/clamav/clamd.conf \
-  && sed -i 's/^LocalSocket/#LocalSocket/' /etc/clamav/clamd.conf \
-  && sed -i '/LocalSocketMode/a TCPSocket 3310' /etc/clamav/clamd.conf \
-  && sed -i '/LocalSocketMode/a TCPAddr 127.0.0.1' /etc/clamav/clamd.conf \
-  && sed -i '/^DetectBrokenExecutables/d' /etc/clamav/clamd.conf
+  && apt-get install -y clamdscan
 
 # Clean up install
 RUN apt-get autoclean -y \
@@ -115,27 +109,19 @@ COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /release.txt /release.txt
 COPY --from=generator /usr/local/bin/envtpl /usr/local/bin/envtpl
 
-# Add freshclam configuration file
-ADD docker/latest/freshclam.conf.tpl /etc/clamav/freshclam.conf.tpl
-
-# Export things
-EXPOSE 3000
+# Wait helper
+ADD docker/latest/root /
 
 # Working directory for app
 WORKDIR /srv/app
-
-# Wait helper
-ADD src/script/wait-for-it /usr/local/bin/wait-for-it
-RUN chmod +x /usr/local/bin/wait-for-it
-
-# Add application help
-ADD src/script/app-help /usr/local/bin/app-help
-RUN chmod +x /usr/local/bin/app-help
 
 # Make foreman happy
 # and start without any set env var
 # by .env*
 RUN touch /tmp/.env-intentionally-left-blank
+
+# Export things
+EXPOSE 3000
 
 # Set entrypoint for image/container
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]

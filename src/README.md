@@ -53,6 +53,9 @@ SECRET_KEY_BASE=$key RAILS_ENV=production rails s --port 8083
   You need to install `clamav` for virus detection. Make sure the clamav-daemon
   is running (`clamd`) and has fresh virus patterns.
 
+  If you're going to use the docker image, make sure `CLAMAV_CLAMD_TCP_ADDRESS`
+  (default: `clamav-1`) points to the correct host/container running `clamd`.
+
 ### Firewall rules
 
 Following you can find an example configuration for iptables to secure your server. It
