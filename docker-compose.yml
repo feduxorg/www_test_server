@@ -8,8 +8,11 @@ services:
       POSTGRES_DB: test_production
       POSTGRES_PASSWORD: Test123
     container_name: test-db-1
-    volumes:
-      - "./db:/var/lib/postgresql/data"
+    #
+    # Uncomment to persist data
+    #
+    # volumes:
+    #   - "./db:/var/lib/postgresql/data"
     networks:
       - internal
 
@@ -24,7 +27,7 @@ services:
     container_name: test-web-1
     labels:
       - traefik.enable=true
-      - traefik.frontend.rule=Host:test.example.com
+      - traefik.frontend.rule=Host:test.example.com,localhost
     environment:
       DATABASE_URL: postgresql://test_production:Test123@test-db-1:5432/test_production
       RAILS_MAX_THREADS: 5
@@ -33,8 +36,12 @@ services:
       # LOG_LEVEL: debug
     ports:
       - 3000:3000
-    volumes:
-      - ./src:/srv/app
+    #
+    # Uncomment to use development version. Make sure assets are compiled
+    # upfront: rails assets:precompile
+    #
+    # volumes:
+    #   - ./src:/srv/app
     networks:
       - internal
     depends_on:
