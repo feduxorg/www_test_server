@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+puma --environment ${RAILS_ENV} --bind tcp://${RACK_HOST}:${RACK_PORT}

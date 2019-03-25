@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+if which freshclam >/dev/null 2>&1; then
+  while true; do
+    freshclam -c 4 || echo "Ignoring error"
+    echo "Wait for tomorrow $(date --date='next day') to update patterns again"
+    sleep 86400
+  done
+fi
+
+sleep infinity
