@@ -84,7 +84,7 @@ module TestServer
       @file_download.destroy
 
       respond_to do |format|
-        format.html { redirect_to file_downloads_url, notice: 'File was successfully destroyed.' }
+        format.html { redirect_to test_server_file_downloads_url, notice: 'File was successfully destroyed.' }
       end
     end
 
