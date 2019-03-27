@@ -81,6 +81,14 @@
               - if %i(new? edit? update?).any? { |m| policy(TestServer::FileDownload).public_send(m) }
                 %li.ts-dropdown-item
                   = link_to t("views.file_downloads.form.link"), new_test_server_file_download_path
+          %li.ts-dropdown
+            %a.ts-dropdown-toggle{ href: test_server_active_content_path, role: "button", "data-toggle": "dropdown" }
+              = t('views.active_content.link')
+            %ul.ts-dropdown-menu.dropdown-menu
+              %li.ts-dropdown-item
+                = link_to t('views.active_content.index.link'), test_server_active_content_path
+              %li.ts-dropdown-item
+                = link_to t("views.active_content.javascript.title"), test_server_active_content_javascript_path
           - if policy(:meta_information).index?
             %li.ts-dropdown
               %a.ts-dropdown-toggle{ href: test_server_meta_information_index_path, role: "button", "data-toggle": "dropdown" }

@@ -15,6 +15,11 @@ Rails.application.routes.draw do
 
     resources :meta_information, only: %i(index)
 
+    namespace :active_content do
+      get :javascript, to: 'javascript#show'
+    end
+    get :active_content, to: 'active_content#index'
+
     namespace :dns_requests do
       resources :host_name, only: %i(new create)
       resources :ip_address, only: %i(new create)

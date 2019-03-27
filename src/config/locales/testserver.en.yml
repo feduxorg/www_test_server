@@ -60,6 +60,15 @@ en:
       eicar:
         title: Sends eicar test string back
         link: Eicar Test File
+    active_content:
+      title: Active Content
+      link: Active Content
+      index:
+        title: Overview for active content tests
+        link: Overview
+      javascript:
+        title: Sends HTML with JavaScript to Browser
+        link: HTML with JavaScript
     streaming:
       title: Streaming Tests
       link: Streaming
